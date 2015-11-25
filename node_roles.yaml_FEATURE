@@ -1,8 +1,8 @@
 fuel-plugin-nfs:
   # Role name
-  name: "Set here the name for the role. This name will be displayed in the Fuel web UI"
+  name: "NFS server"
   # Role description
-  description: "Write description for your role"
+  description: "Separate NFS Server"
   # If primaty then during orchestration this role will be
   # splitted into primary-role and role
   has_primary: false
@@ -11,3 +11,9 @@ fuel-plugin-nfs:
   # Weight that will be used to sort out the
   # roles on the Fuel web UI
   weight: 1000
+  conflicts:
+     - controller
+     - compute
+     - cinder
+  limits:
+     min: 1

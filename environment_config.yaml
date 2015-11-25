@@ -1,7 +1,14 @@
 attributes:
-  fuel-plugin-nfs_text:
-    value: 'Set default value'
-    label: 'Text field'
-    description: 'Description for text field'
-    weight: 25
+  nfs_volume_path:
+    value: ''
+    label: 'NFS volume path:'
+    description: 'e.g. 192.168.0.2:/nfs/vol'
+    weight: 10
     type: "text"
+  nfs_mount_point:
+    value: ''
+    label: 'NFS mount point on Controller:'
+    description: 'e.g. /mnt/nfs/vol'
+    weight: 20
+    type: 'text'
+

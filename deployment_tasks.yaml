@@ -3,7 +3,7 @@
 
 - id: fuel-plugin-nfs
   type: group
-  role: [fuel-plugin-nfs]
+  role: [base-os]
 
 - id: fuel-plugin-nfs-deployment-puppet
   type: puppet
