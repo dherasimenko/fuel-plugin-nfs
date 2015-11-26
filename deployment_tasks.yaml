@@ -15,7 +15,7 @@
     puppet_modules: ""
     timeout: 3600
 
-- id: fuel-plugin-nfs-common-puppet
+- id: fuel-plugin-nfs-server-puppet
   type: puppet
   role: [fuel-plugin-nfs]
   required_for: [deploy_end]

@@ -3,7 +3,7 @@ name: fuel-plugin-nfs
 # Human-readable name for your plugin
 title: NFS Server
 # Plugin version
-version: '1.0.0'
+version: '1.0.2'
 # Description
 description: Enable Compute node to use NFS as storage
 # Required fuel version
