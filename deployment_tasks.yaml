@@ -8,11 +8,20 @@
 - id: fuel-plugin-nfs-common-puppet
   type: puppet
   role: [compute]
-  groups: [fuel-plugin-nfs]
   required_for: [deploy_end]
   requires: [deploy_start]
   parameters:
     puppet_manifest: "puppet/nfs/manifests/nfs-common.pp"
+    puppet_modules: ""
+    timeout: 3600
+
+- id: fuel-plugin-nfs-common-puppet
+  type: puppet
+  role: [fuel-plugin-nfs]
+  required_for: [deploy_end]
+  requires: [deploy_start]
+  parameters:
+    puppet_manifest: "puppet/nfs/manifests/nfs-server.pp"
     puppet_modules: ""
     timeout: 3600
 
