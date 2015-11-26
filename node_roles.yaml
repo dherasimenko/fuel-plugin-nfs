@@ -1,4 +1,4 @@
-fuel-plugin-nfs:
+nfs-server:
   # Role name
   name: "NFS server"
   # Role description

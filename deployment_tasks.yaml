@@ -17,7 +17,7 @@
 
 - id: fuel-plugin-nfs-server-puppet
   type: puppet
-  role: [fuel-plugin-nfs]
+  role: [nfs-server]
   required_for: [deploy_end]
   requires: [deploy_start]
   parameters:
