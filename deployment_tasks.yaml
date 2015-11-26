@@ -1,17 +1,18 @@
 # These tasks will be merged into deployment graph. Here you
 # can specify new tasks for any roles, even built-in ones.
 
-- id: fuel-plugin-nfs
-  type: group
-  role: [base-os]
+#- id: fuel-plugin-nfs
+#  type: group
+#  role: [base-os]
 
-- id: fuel-plugin-nfs-deployment-puppet
+- id: fuel-plugin-nfs-common-puppet
   type: puppet
+  role: [compute]
   groups: [fuel-plugin-nfs]
   required_for: [deploy_end]
   requires: [deploy_start]
   parameters:
-    puppet_manifest: "deploy.pp"
+    puppet_manifest: "puppet/nfs/manifests/nfs-common.pp"
     puppet_modules: ""
     timeout: 3600
 

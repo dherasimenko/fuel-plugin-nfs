@@ -15,5 +15,3 @@ fuel-plugin-nfs:
      - controller
      - compute
      - cinder
-  limits:
-     min: 1
