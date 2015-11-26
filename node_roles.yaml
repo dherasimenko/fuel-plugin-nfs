@@ -13,5 +13,5 @@ nfs-server:
   weight: 1000
   conflicts:
      - controller
-     - compute
-     - cinder
+  update_required:
+     - nfs-server
