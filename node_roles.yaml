@@ -11,7 +11,5 @@ nfs-server:
   # Weight that will be used to sort out the
   # roles on the Fuel web UI
   weight: 1000
-  conflicts:
-     - controller
   update_required:
      - nfs-server
