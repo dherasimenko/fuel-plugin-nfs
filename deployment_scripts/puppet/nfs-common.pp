@@ -11,9 +11,5 @@
       }
     }
     else {
-      fail("Unsuported osfamily ${::osfamily}, 
-           currently Debian are the only supported platforms")
+      fail("Unsuported osfamily ${::osfamily}, currently Debian are the only supported platforms")
     }
-
-    
-

@@ -4,45 +4,30 @@
 - id: nfs-server
   type: group
   role: [nfs-server]
+  requires: [deploy_start]
+  required_for: [deploy_end]
+  tasks: [fuel_pkgs, hiera, globals, tools, logging, netconfig,
+          hosts, firewall, ssl-keys-saving, ssl-add-trust-chain]
+  parameters:
+    strategy:
+      type: parallel
 
-- id: fuel-plugin-nfs-common-puppet
+- id: nfs-common-setup
   type: puppet
   role: [compute]
-  required_for: [post_deployment_end]
-  requires: [post_deployment_start]
+  required_for: [deploy_end]
+  requires: [openstack-network-end]
   parameters:
     puppet_manifest: "puppet/nfs-common.pp"
     puppet_modules: "/etc/puppet/modules"
     timeout: 3600
 
-- id: fuel-plugin-nfs-server-puppet
+- id: nfs-server-setup
   type: puppet
   role: [nfs-server]
-  required_for: [post_deployment_end]
-  requires: [post_deployment_start]
+  required_for: [deploy_end]
+  requires: [netconfig]
   parameters:
     puppet_manifest: "puppet/nfs-server.pp"
     puppet_modules: "/etc/puppet/modules/"
     timeout: 3600
-
-#- id: fuel-plugin-nfs-post-deployment-sh
-#  type: shell
-#  role: [fuel-plugin-nfs]
-#  required_for: [post_deployment_end]
-#  requires: [post_deployment_start]
-#  parameters:
-#    cmd: echo post_deployment_task_executed > /tmp/post_deployment
-#    retries: 3
-#    interval: 20
-#    timeout: 180
-
-#- id: fuel-plugin-nfs-pre-deployment-sh
-#  type: shell
-#  role: [fuel-plugin-nfs]
-#  required_for: [pre_deployment_end]
-#  requires: [pre_deployment_start]
-#  parameters:
-#    cmd: echo pre_deployment_task_executed > /tmp/pre_deployment
-#    retries: 3
-#    interval: 20
-#    timeout: 180

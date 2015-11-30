@@ -13,9 +13,7 @@
       }
 
       file { '/etc/exports':
-        content => "${nfs::env_verification::nfs_srv_folder} 
-                    ${::network_br_storage}/255.255.255.0
-                    (rw,sync,no_subtree_check)",
+        content => "${nfs_srv_folder} ${::network_br_storage}/255.255.255.0 (rw,sync,no_subtree_check)",
       }
 
       exec { 'exportfs -ra':
@@ -29,7 +27,5 @@
       }
     }
     else {
-        fail("Unsuported osfamily ${::osfamily}, 
-             currently Debian are the only supported platforms")
+      fail("Unsuported osfamily ${::osfamily}, currently Debian are the only supported platforms")
     }
-    
