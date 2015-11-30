@@ -1,3 +1,5 @@
+notice('MODULAR: nfs-server.pp')
+
     if $::osfamily == 'Debian' {
       $required_pkgs = [ 'rpcbind', 'nfs-kernel-server' ]
       $services_name = 'nfs-kernel-server'
