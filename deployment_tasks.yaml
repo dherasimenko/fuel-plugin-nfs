@@ -4,19 +4,17 @@
 - id: nfs-server
   type: group
   role: [nfs-server]
-  requires: [deploy_start]
-  required_for: [deploy_end]
   tasks: [fuel_pkgs, hiera, globals, tools, logging, netconfig,
-          hosts, firewall, ssl-keys-saving, ssl-add-trust-chain]
+          hosts]
   parameters:
     strategy:
-      type: parallel
+      type: one_by_one
 
 - id: nfs-common-setup
   type: puppet
   role: [compute]
-  required_for: [deploy_end]
-  requires: [openstack-network-end]
+  required_for: [post_deployment_end]
+  requires: [post_deployment_start]
   parameters:
     puppet_manifest: "puppet/nfs-common.pp"
     puppet_modules: "/etc/puppet/modules"
