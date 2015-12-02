@@ -23,8 +23,8 @@
 - id: nfs-server-setup
   type: puppet
   role: [nfs-server]
-  required_for: [deploy_end]
-  requires: [netconfig]
+  required_for: [post_deployment_end]
+  requires: [post_deployment_start]
   parameters:
     puppet_manifest: "puppet/nfs-server.pp"
     puppet_modules: "/etc/puppet/modules/"

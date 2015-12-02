@@ -1,7 +1,7 @@
 NFS Server/Client Plugin
 ============
 
-This plugin provides ability to setup NFS Server Service on separate bare metal
-machine. Main while it setup NFS Client on all Compute Servers.
+- Setup NFS Server Service on separate bare metal
+- Setup NFS Client on all Compute Servers.
+- Auto mount all NFS Storages to all Compute Servers
 
-That is it for now! :)
