@@ -1,9 +1,11 @@
 notice('MODULAR: nfs-server.pp')
 
+$nfs_plugin_data = hiera('fuel-plugin-nfs', {})
+$nfs_volume_path = $nfs_plugin_data['nfs_volume_path']
+
 if $::osfamily == 'Debian' {
   $required_pkgs = [ 'rpcbind', 'nfs-kernel-server' ]
   $services_name = 'nfs-kernel-server'
-  $nfs_srv_folder = '/nfs'
 
   package { $required_pkgs:
     ensure => present,
@@ -15,7 +17,7 @@ if $::osfamily == 'Debian' {
   }
   
   file { '/etc/exports':
-    content => "${nfs_srv_folder} ${::network_br_storage}/255.255.255.0(rw,sync,no_subtree_check)",
+    content => "${nfs_volume_path} ${::network_br_storage}/255.255.255.0(rw,sync,no_subtree_check)",
   }
   
   exec { 'exportfs -ra':

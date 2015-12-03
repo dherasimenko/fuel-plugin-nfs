@@ -13,3 +13,5 @@ nfs-server:
   weight: 1000
   update_required:
      - nfs-server
+  limits:
+    min: 1

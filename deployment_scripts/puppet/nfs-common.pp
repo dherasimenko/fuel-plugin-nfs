@@ -1,12 +1,17 @@
 notice('MODULAR: nfs-common.pp')
 
+$nodes = hiera('nodes', {})
+$nfs_plugin_data = hiera('fuel-plugin-nfs', {})
+$nfs_mount_point = $nfs_plugin_data['nfs_mount_point']
+$nfs_volume_path = $nfs_plugin_data['nfs_volume_path']
+
 # get storage IP of NFS Servers, mount storaget on Compute node
 define nfs_server_ip {
   if $name['role'] == 'nfs-server' {
-    mount { '/mnt/nfs':
+    mount { $nfs_mount_point:
       ensure  => mounted,
       atboot  => true,
-      device  => "${name['storage_address']}:/nfs",
+      device  => "${name['storage_address']}:${nfs_volume_path}",
       fstype  => 'nfs',
       options => 'vers=4',
     }
@@ -16,6 +21,11 @@ define nfs_server_ip {
 if $::osfamily == 'Debian' {
   $required_pkgs = [ 'rpcbind', 'nfs-common' ]
   $service_name = 'rpcbind'
+
+  file { $nfs_mount_point:
+    ensure => 'directory',
+    mode   => '0777',
+  }
   
   package { $required_pkgs:
     ensure => present,
@@ -25,7 +35,6 @@ if $::osfamily == 'Debian' {
     ensure => running,
   }
 
-  $nodes = hiera('nodes')
   nfs_server_ip { $nodes: }
 
 }
