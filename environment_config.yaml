@@ -1,14 +1,20 @@
 attributes:
   nfs_volume_path:
-    value: ''
-    label: 'NFS volume path:'
-    description: 'e.g. 192.168.0.2:/nfs/vol'
+    value: '/nfs'
+    label: 'Shared folder on NFS Server:'
+    description: 'e.g. /nfs/vol'
     weight: 10
     type: "text"
+    regex:
+      source: '.+'
+      error: "This field should not be empty"
   nfs_mount_point:
-    value: ''
+    value: '/mnt/nfs'
     label: 'NFS mount point on Controller:'
     description: 'e.g. /mnt/nfs/vol'
     weight: 20
     type: 'text'
+    regex:
+      source: '.+'
+      error: "This field should not be empty"
 

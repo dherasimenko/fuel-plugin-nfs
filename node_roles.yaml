@@ -15,3 +15,4 @@ nfs-server:
      - nfs-server
   limits:
     min: 1
+    max: 1
