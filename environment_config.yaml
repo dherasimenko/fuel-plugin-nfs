@@ -1,7 +1,20 @@
 attributes:
-  fuel-plugin-nfs_text:
-    value: 'Set default value'
-    label: 'Text field'
-    description: 'Description for text field'
-    weight: 25
+  nfs_volume_path:
+    value: '/nfs'
+    label: 'Shared folder on NFS Server:'
+    description: 'e.g. /nfs/vol'
+    weight: 10
     type: "text"
+    regex:
+      source: '.+'
+      error: "This field should not be empty"
+  nfs_mount_point:
+    value: '/mnt/nfs'
+    label: 'NFS mount point on Controller:'
+    description: 'e.g. /mnt/nfs/vol'
+    weight: 20
+    type: 'text'
+    regex:
+      source: '.+'
+      error: "This field should not be empty"
+
