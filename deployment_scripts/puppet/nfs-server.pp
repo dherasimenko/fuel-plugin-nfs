@@ -11,7 +11,7 @@ if $::osfamily == 'Debian' {
     ensure => present,
   }
   
-  file { $nfs_srv_folder:
+  file { $$nfs_volume_path:
     ensure => 'directory',
     mode   => '0777',
   }
