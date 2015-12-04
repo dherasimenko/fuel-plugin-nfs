@@ -2,6 +2,7 @@ notice('MODULAR: nfs-server.pp')
 
 $nfs_plugin_data = hiera('fuel-plugin-nfs', {})
 $nfs_volume_path = $nfs_plugin_data['nfs_volume_path']
+$nfs_net_mask = $nfs_plugin_data['nfs_net_mask']
 
 if $::osfamily == 'Debian' {
   $required_pkgs = [ 'rpcbind', 'nfs-kernel-server' ]
@@ -16,19 +17,22 @@ if $::osfamily == 'Debian' {
     mode   => '0777',
   }
   
-  file { '/etc/exports':
-    content => "${nfs_volume_path} ${::network_br_storage}/255.255.255.0(rw,sync,no_subtree_check)",
+  firewall { '100 allow tcp access to nfs service':
+    port   => [111, 2049],
+    proto  => all,
+    action => accept,
   }
-  
-  exec { 'exportfs -ra':
-    path        => ['/usr/bin', '/usr/sbin'],
-    subscribe   => File['/etc/exports'],
-    refreshonly => true
-  }
-  
+
   service { $services_name:
     ensure => running,
+    enable => true,
   }
+
+  file { '/etc/exports':
+    content => "${nfs_volume_path} ${::network_br_storage}/${nfs_net_mask}(rw,sync,no_subtree_check)",
+    notify  => Service[$services_name]
+  }
+  
 }
 else {
   fail("Unsuported osfamily ${::osfamily}, currently Debian are the only supported platforms")

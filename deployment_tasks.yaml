@@ -5,18 +5,18 @@
   type: group
   role: [nfs-server]
   tasks: [fuel_pkgs, hiera, globals, tools, logging, netconfig,
-          hosts]
+          hosts, firewall]
   parameters:
     strategy:
       type: one_by_one
 
 - id: nfs-common-setup
   type: puppet
-  role: [compute]
+  role: [cinder]
   required_for: [post_deployment_end]
   requires: [post_deployment_start]
   parameters:
-    puppet_manifest: "puppet/nfs-common.pp"
+    puppet_manifest: "puppet/nfs-common-cinder.pp"
     puppet_modules: "/etc/puppet/modules"
     timeout: 3600
 
