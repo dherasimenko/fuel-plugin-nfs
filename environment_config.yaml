@@ -21,7 +21,7 @@ attributes:
     value: '255.255.255.0'
     label: 'NFS Network Mask:'
     description: 'e.g. 255.255.255.0'
-    weight: 20
+    weight: 30
     type: 'text'
     regex:
       source: '.+'

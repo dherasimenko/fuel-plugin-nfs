@@ -1,7 +1,7 @@
 # Plugin name
 name: fuel-plugin-cinder-nfs
 # Human-readable name for your plugin
-title: NFS Server
+title: NFS Server for Cinder
 # Plugin version
 version: '1.0.0'
 # Description
