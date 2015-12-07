@@ -1,10 +1,5 @@
 require 'spec_helper'
 
-# check if cinder installed
-describe package('cinder'), :if => os[:family] == 'ubuntu' do
-  it { should be_installed }
-end
-
 # check if cinder-volume installed
 describe package('cinder-volume'), :if => os[:family] == 'ubuntu' do
   it { should be_installed }
