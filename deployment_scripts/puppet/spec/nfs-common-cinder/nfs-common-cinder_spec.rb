@@ -37,4 +37,3 @@ end
 describe file('/etc/cinder/nfs_shares.txt'), :if => os[:family] == 'ubuntu' do
   it { should be_file }
 end
-
