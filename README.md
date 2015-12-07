@@ -1,4 +1,4 @@
-NFS Server/Client Plugin
+NFS Server Plugin for Cinder
 ============
 
 Compatible versions:
