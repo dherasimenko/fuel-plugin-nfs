@@ -5,7 +5,7 @@ title: NFS Server for Cinder
 # Plugin version
 version: '1.0.0'
 # Description
-description: Enable Compute node to use NFS as storage
+description: Enable Cinder servers to use NFS as storage
 # Required fuel version
 fuel_version: ['7.0']
 # Specify license of your plugin
