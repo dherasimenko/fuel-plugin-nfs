@@ -1,6 +1,6 @@
 notice('MODULAR: nfs-server.pp')
 
-$nfs_plugin_data = hiera('fuel-plugin-nfs', {})
+$nfs_plugin_data = hiera('fuel-plugin-cinder-nfs', {})
 $nfs_volume_path = $nfs_plugin_data['nfs_volume_path']
 $nfs_net_mask = $nfs_plugin_data['nfs_net_mask']
 
