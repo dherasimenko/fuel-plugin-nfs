@@ -22,3 +22,7 @@ describe file('/etc/exports'), :if => os[:family] == 'ubuntu' do
   it { should be_grouped_into 'root' }
 end
 
+# iptables check
+describe iptables do
+  it { should have_rule('-A INPUT -p tcp -m multiport --ports 111,2049 -m comment --comment "150 allow tcp access to nfs service" -j ACCEPT') }
+end
