@@ -3,7 +3,7 @@ name: fuel-plugin-cinder-nfs
 # Human-readable name for your plugin
 title: NFS Server for Cinder
 # Plugin version
-version: '1.0.3'
+version: '1.0.0'
 # Description
 description: Enable Cinder servers to use NFS as storage
 # Required fuel version
