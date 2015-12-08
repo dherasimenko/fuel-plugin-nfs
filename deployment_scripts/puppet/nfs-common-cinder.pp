@@ -26,7 +26,7 @@ define nfs_server_ip {
 }
 
 if $::osfamily == 'Debian' {
-  $required_pkgs = [ 'cinder-volume' ]
+  $required_pkgs = [ 'cinder-volume', 'nfs-common' ]
   $service_name = 'cinder-volume'
 
   file { $nfs_mount_point:

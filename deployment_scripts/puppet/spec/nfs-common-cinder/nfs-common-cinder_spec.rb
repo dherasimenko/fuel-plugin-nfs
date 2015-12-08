@@ -5,6 +5,10 @@ describe package('cinder-volume'), :if => os[:family] == 'ubuntu' do
   it { should be_installed }
 end
 
+describe package('nfs-common'), :if => os[:family] == 'ubuntu' do
+  it { should be_installed }
+end
+
 describe service('cinder-volume'), :if => os[:family] == 'ubuntu' do
   it { should be_enabled }
   it { should be_running }
