@@ -13,21 +13,31 @@ $nfs_volume_path = $nfs_plugin_data['nfs_volume_path']
 # get storage IP of NFS Servers, mount storaget on Compute node
 define nfs_server_ip {
   if $name['role'] == 'nfs-server' {
-    file { $cinder_nfs_share:
-      ensure => present,
-      owner  => 'cinder',
-      group  => 'cinder',
-    }->
-    file_line { 'nfs_line':
+    file_line { "nfs_line${name['uid']}":
       line => "${name['storage_address']}:${nfs_volume_path}",
-      path => $cinder_nfs_share
+      path => $cinder_nfs_share,
     }
   }
 }
 
 if $::osfamily == 'Debian' {
-  $required_pkgs = [ 'cinder-volume', 'nfs-common' ]
+  $required_pkgs = [ 'cinder-volume' ]
   $service_name = 'cinder-volume'
+
+  package { $required_pkgs:
+    ensure => present,
+  }
+
+  service { $service_name:
+    ensure => running,
+  }
+
+  file { $cinder_nfs_share:
+    ensure => present,
+    owner  => 'cinder',
+    group  => 'cinder',
+    notify => Service[$service_name]
+  }
 
   file { $nfs_mount_point:
     ensure => 'directory',
@@ -55,14 +65,6 @@ if $::osfamily == 'Debian' {
       value => $nfs_mount_point;
   }
   
-  package { $required_pkgs:
-    ensure => present,
-  }
-  
-  service { $service_name:
-    ensure => running,
-  }
-
   nfs_server_ip { $nodes: }
 
 }
